@@ -1,6 +1,6 @@
 :root{
   /* ← tweak this to resize everything uniformly */
-  --scale: 1.25;                 /* 1 = base size, try 1.25 or 1.5 */
+  --scale: 1.0;                 /* 1 = base size, try 1.25 or 1.5 */
 
   /* colors */
   --bg: #222;
