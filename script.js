@@ -120,6 +120,7 @@ buttons.forEach(btn => {
 })
 value(0);
 
+//keyboard support
 document.addEventListener("keydown", event => {
   const keyMap = {
     Enter: "=",
