@@ -98,6 +98,10 @@ button{
   filter: none;
   background: var(--op-hover);
 }
+.btn.active {
+  transform: scale(.98);
+  filter: brightness(1.15);
+}
 
 /* Optional: make "0" span two cells */
 /* .row:last-child .btn[data-key="0"]{ grid-column: span 2; } */
