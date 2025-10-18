@@ -3,6 +3,7 @@
 let a = "";
 let operator = "";
 let b = "";
+let justCalculated = false;
 
 //UI
 const screen = document.querySelector("#screen");
@@ -49,10 +50,18 @@ buttons.forEach(btn => {
 
         //number input
         if (!isNaN(key) || key ===".") {
+
+            if (justCalculated && !operator) { 
+            a = ""; 
+            justCalculated = false; 
+            }  
+
             if (!operator) {
+
                 a += key;
                 value(a);
             }
+
             else {
                 b += key;
                 value(b)
@@ -62,19 +71,28 @@ buttons.forEach(btn => {
         //operator input
         if (["+", "-", "*", "/"].includes(key)) {
 
-            if(a && !b) {
-                operator = key;
-                return;
+           if (a && operator && b) {
+                const result = compute(a, operator, b);
+                value(result);
+                a = result.toString();
+                b = "";
             }
+            operator = key;
+            justCalculated = false;
+            return;
         }
         //Equals input
         if (key === "=") {
+
             if (a && operator && b) {
+
                 const result = compute(a,operator, b);
+
                 value(result);
                 a = result.toString();
                 operator = "";
                 b = "";
+                justCalculated = true;
             }
         }
         //Clear input
@@ -87,10 +105,14 @@ buttons.forEach(btn => {
         }
         //Delete input
         if (key === "delete") {
+
+            if (justCalculated && !operator) return;
+
             if(!operator) {
                 a = a.slice(0, -1);
                 value (a || "0");
-            } else {
+            }
+            else {
                 b = b.slice(0 ,-1);
                 value(b || "0");
             }
@@ -98,3 +120,4 @@ buttons.forEach(btn => {
         }
     })    
 })
+value(0);
