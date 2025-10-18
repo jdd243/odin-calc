@@ -55,13 +55,11 @@ buttons.forEach(btn => {
             a = ""; 
             justCalculated = false; 
             }  
-
             if (!operator) {
 
                 a += key;
                 value(a);
             }
-
             else {
                 b += key;
                 value(b)
@@ -121,3 +119,21 @@ buttons.forEach(btn => {
     })    
 })
 value(0);
+
+document.addEventListener("keydown", event => {
+  const keyMap = {
+    Enter: "=",
+    "=": "=",
+    Backspace: "delete",
+    Escape: "clear",
+    c: "clear"
+  };
+    const key = keyMap[event.key] || event.key;
+    const btn = document.querySelector(`[data-key="${key}"]`);
+    if (!btn) return;
+
+    btn.classList.add("active");
+    btn.click();
+
+    setTimeout(() => btn.classList.remove("active"), 120)
+});
